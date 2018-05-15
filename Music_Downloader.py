@@ -11,6 +11,7 @@ import sys
 import time
 
 no_of_recommended = 5
+no_of_links_to_check_if_music = 3
 links_watch = []
 link_text = []
 t1 = threading.Thread()
@@ -108,7 +109,7 @@ def SearchMusic(SearchUrl, controller):
     for link in soup.findAll('a', attrs={'href': re.compile("/watch")}):
         links_watch.append(link.get('href'))
         counter = counter+1
-        if counter >= 3:
+        if counter >= no_of_links_to_check_if_music:
             break
     for i in links_watch:
         my_url = "https://www.youtube.com"+str(i)
@@ -203,13 +204,12 @@ class PageOne(tk.Frame):
         button.pack()
 
 
-
-
 if __name__ == "__main__":
     app = SampleApp()
     app.mainloop()
 
 ''' Parseing Captured STDOUT '''
+''' This can be utilised to display Download Progress Bar '''
 # result_string = result.getvalue()
 
 # f = open("log.txt", 'w')
